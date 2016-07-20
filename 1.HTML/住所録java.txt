@@ -1,0 +1,128 @@
+package takahashi;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class menber extends HttpServlet {
+
+	public void doPost(HttpServletRequest req, HttpServletResponse res)
+	throws IOException, ServletException {
+
+	    Connection con = null;
+
+		// 要求文字コードのセット
+		req.setCharacterEncoding("Shift_JIS");
+
+		// 応答文字コードのセット
+		res.setContentType("text/html; charset=Shift_JIS");
+
+		// フォームデータの取得
+		String namae = req.getParameter("name");
+		String zyusyo = req.getParameter("address");
+		String denwa = req.getParameter("tel");
+
+	    String url = "jdbc:mysql://localhost/record";
+	    String user = "root";
+	    String password = "2914hasunohA";
+
+	    String a;
+	    String b;
+	    String c;
+
+	    a = namae;
+	    b = zyusyo;
+	    c = denwa;
+
+	    if (a == "" || b == "" || c == "" ) {
+
+		    /* HTML 出力用 PrintWriter */
+		    PrintWriter out = res.getWriter();
+
+		    /* HTML出力 */
+		    out.println("<html>");
+		    out.println("<head>");
+		    out.println("<title>登録失敗画面</title>");
+		    out.println("</head>");
+		    out.println("<body>");
+		    out.println("<table>");
+		    out.println("<H1>");
+		    out.println("登録失敗！！！！！！！");
+		    out.println("空欄を埋めてください！");
+		    out.println("<H1>");
+		    out.println("<input type=\"button\" value=\"一覧表示\" "
+		    		+ "onclick =\"location.href =\' http://localhost:8080/Html/New_address.jsp\'\" />");
+		    out.println("<table>");
+		    out.println("</body>");
+		    out.println("</html>");
+		    out.close();
+
+		} else {
+
+		    try {
+		      // JDBCドライバのロード
+		      Class.forName("com.mysql.jdbc.Driver");
+		      // DB接続の作成
+		      con = DriverManager.getConnection(url, user, password);
+
+		      // SQLコンテナの作成
+		      Statement stmt = con.createStatement();
+		      String sql = "INSERT INTO tbAddress(name, address, tel) VALUES('"+ namae +"', '"+ zyusyo +"', '"+ denwa +"')";
+
+		      // SQL文の実行 (挿入)
+		      int num = stmt.executeUpdate(sql);
+		      System.out.println("登録件数 : " + num);
+
+		      // SQLコンテナのクローズ
+		      stmt.close();
+			    }
+		    catch(SQLException e) {
+		      while(e != null) {
+		        System.err.println(e.getMessage());
+		        System.err.println(e.getSQLState());
+		        System.err.println(e.getErrorCode());
+		        System.out.println("");
+
+		        e = e.getNextException();
+		      }
+		    }
+		    catch(Exception e) {
+		      e.printStackTrace();
+		    }
+		    finally {
+		      try {
+		        con.close();
+		      }
+		      catch(SQLException e) {}
+		    }
+	    }
+
+	    /* HTML 出力用 PrintWriter */
+	    PrintWriter out = res.getWriter();
+
+	    /* HTML出力 */
+	    out.println("<html>");
+	    out.println("<head>");
+	    out.println("<title>登録成功画面</title>");
+	    out.println("</head>");
+	    out.println("<body>");
+	    out.println("<H1>");
+	    out.println("登録成功！！！！！！！");
+	    out.println("<H1>");
+	    out.println("<input type=\"button\" value=\"一覧表示\" "
+	    		+ "onclick =\"location.href =\' http://localhost:8080/Html/addresslist.jsp\'\" />");
+	    out.println("</body>");
+
+	    out.println("</html>");
+	    out.close();
+
+	}
+}

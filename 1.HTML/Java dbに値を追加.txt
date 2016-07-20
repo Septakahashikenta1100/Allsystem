@@ -1,0 +1,63 @@
+package takahashi;
+
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class menber extends HttpServlet {
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+	throws IOException, ServletException{
+
+		response.setContentType("text/html; charset=Shift_JIS");
+
+	    String url = "jdbc:mysql://localhost/db名";
+	    String user = "root";
+	    String password = "2914hasunohA";
+	    Connection con = null;
+
+	    try {
+	      // JDBCドライバのロード
+	      Class.forName("com.mysql.jdbc.Driver");
+	      // DB接続の作成
+	      con = DriverManager.getConnection(url, user, password);
+
+	      // SQLコンテナの作成
+	      Statement stmt = con.createStatement();
+	      String sql = "INSERT INTO tbl名(col名) VALUES(入れたい値)";
+
+	      // SQL文の実行 (挿入)
+	      int num = stmt.executeUpdate(sql);
+	      System.out.println("登録件数 : " + num);
+
+	      // SQLコンテナのクローズ
+	      stmt.close();
+	    }
+	    catch(SQLException e) {
+	      while(e != null) {
+	        System.err.println(e.getMessage());
+	        System.err.println(e.getSQLState());
+	        System.err.println(e.getErrorCode());
+	        System.out.println("");
+
+	        e = e.getNextException();
+	      }
+	    }
+	    catch(Exception e) {
+	      e.printStackTrace();
+	    }
+	    finally {
+	      try {
+	        con.close();
+	      }
+	      catch(SQLException e) {}
+	    }
+
+    }
+  }

@@ -1,0 +1,56 @@
+<%@page contentType="text/html" pageEncoding="Shift_JIS"%>
+<%@page import="java.sql.*"%>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<title>会員登録</title>
+</head>
+<body>
+
+<P>会員一覧</P>
+
+<%
+Connection con = null;
+
+try {
+    // JDBCドライバのロード - JDBC4.0（JDK1.6）以降は不要
+    Class.forName("com.mysql.jdbc.Driver").newInstance();
+    // MySQLに接続
+    con = DriverManager.getConnection("jdbc:mysql://localhost:3306/record", "root", "2914hasunohA");
+    System.out.println("MySQLに接続できました。");
+
+    Statement stm = (Statement) con.createStatement();
+    String sql = "select * from tbAddress";
+    ResultSet rs = stm.executeQuery(sql);
+
+    while(rs.next()){
+        String namae = rs.getString("name");
+        String ad = rs.getString("address");
+        String den = rs.getString("tel");
+		String mantan = ("<h4>"+ "氏名" +":"+ namae +"　"+ "住所" +":" + ad +"　"+ "電話番号" +":" + den +"</h4>");
+    }
+
+} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+    System.out.println("JDBCドライバのロードに失敗しました。");
+} catch (SQLException e) {
+    System.out.println("MySQLに接続できませんでした。");
+} finally {
+    if (con != null) {
+        try {
+            con.close();
+        } catch (SQLException e) {
+            System.out.println("MySQLのクローズに失敗しました。");
+        }
+    }
+}
+%>
+
+<input type="radio"/>
+<input type="button" value="更新or削除"/>
+<input type="button" value="新規登録" onclick = "location.href =' http://localhost:8080/Html/New_address.jsp'" />
+
+
+</body>
+</html>
