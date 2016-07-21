@@ -1,0 +1,45 @@
+package takahashi;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import com.mysql.jdbc.Statement;
+
+public class dbdate {
+    public static void main(String[] args) {
+        Connection con = null;
+
+
+        try {
+            // JDBCドライバのロード - JDBC4.0（JDK1.6）以降は不要
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            // MySQLに接続
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/db名", "root", "2914hasunohA");
+            System.out.println("MySQLに接続できました。");
+
+            Statement stm = (Statement) con.createStatement();
+            String sql = "select * from tbl名";
+            ResultSet rs = stm.executeQuery(sql);
+
+            while(rs.next()){
+                int 任意の名前 = rs.getInt("col名");
+                String 任意の名前 = rs.getString("col名");
+                System.out.println("取得結果 -> " + 任意 + ":" + 任意);
+            }
+
+        } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+            System.out.println("JDBCドライバのロードに失敗しました。");
+        } catch (SQLException e) {
+            System.out.println("MySQLに接続できませんでした。");
+        } finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    System.out.println("MySQLのクローズに失敗しました。");
+                }
+            }
+        }
+    }
+}
