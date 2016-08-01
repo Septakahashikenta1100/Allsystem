@@ -1,0 +1,92 @@
+@charset "UTF-8";
+body {
+  position: relative;
+  font-size: 62.5%;
+  line-height: 1.8;
+  margin: 0;
+  background: url(img/背景.jpg);
+}
+h1,h2,p,span,li {
+  font-family: 'Roboto Condensed', Arial, Helvetica, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+  color: #000;
+}
+/*コンテンツエリアの設定*/
+.inner {
+  position: relative;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+/*ヘッダーエリアの装飾*/
+#headerContainer {
+  position: fixed;
+  width: 100%;
+  min-height: 24px;
+  z-index: 1000;
+}
+/*サイトロゴの装飾*/
+#siteID {
+  font-size: 1.8em;
+  font-weight: 700;
+  line-height: 1;
+  margin: 15px 0 0 20px;
+  padding: 0;
+  color: #000;
+}
+#siteID .small {
+  font-size: 0.75em;
+}
+/*フッターの装飾*/
+#footerContainer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 100;
+  width: 100%;
+  padding:  0.5em 0;
+  background: #000;
+}
+#copyright{
+  color: #fff;
+	text-align: center;
+  font-size: 1.4em;
+  margin: 0;
+}
+/*独自スタイル*/
+#contentContainer {
+  padding: 60px 0;
+  margin: 0 auto;
+}
+#galleryContainer img[src="img/loading.gif"]{
+  width: 32px;
+  margin: 30% auto;
+}
+#galleryContainer .navigation img[src="img/loading.gif"]{
+  margin: 0 auto;
+}
+/*付けたし要素*/
+.gnavi {
+	text-align: center;
+	position: relative;
+	width: 400px;
+	margin: auto;
+}
+a {
+	display: block;
+	padding: 5px 50px;
+	font-family:"Arial, Helvetica,"ヒラギノ角ゴ Pro W6","Hiragino Kaku Gothic Pro","メイリオ",Meiryo,Osaka,"ＭＳ Ｐゴシック","MS PGothic",sans-serif;;
+	border: solid 1px #878d8d;
+	background-color: #34495e;
+	color: #ffffff;
+	text-decoration: none;
+}
+#image{
+	position: fixed;
+	bottom:45%;
+	left:45%;
+  z-index: 500;
+  display:none;
+}
+.navigation{
+	display:none;
+}
