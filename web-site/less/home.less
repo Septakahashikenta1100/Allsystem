@@ -1,0 +1,193 @@
+body {
+
+	margin:0;
+
+	header {
+		border-bottom:solid 0.1px #363636;
+
+		#head {
+			max-width:930px;
+			min-width:930px;
+			margin:auto;
+
+			#image {
+				height:100px;
+				float:right;
+			}
+		}
+	}
+	div#wrapper {
+		max-width:900px;
+		min-width:900px;
+		padding:15px;
+		background: #222222;
+		margin:auto;
+
+		#image_display {
+			width:800px;
+			margin: 5px auto;
+			border:solid 1px #ffffff;
+			border-radius: 15px;
+
+			.flexslider {
+
+				.flex-viewport {
+					text-align:center;
+
+					li {
+						position:relative;
+						right:40px;
+						bottom:8px;
+
+						img {
+							height:200px;
+						}
+					}
+				}
+
+				.flex-control-nav {
+				display: none;
+				}
+
+				.flex-direction-nav {
+				display: none;
+				}
+			}
+		}
+
+		#box1 {
+
+			&:after {
+				content:"";
+				display: block;
+				clear: both;
+			}
+
+			#menu {
+				width:197.5px;
+				height:550px;
+				float:left;
+				border:solid 1px #ffffff;
+				border-radius:5px;
+				margin-right:4.5px;
+
+				h2 {
+					color:white;
+					text-align:center;
+				}
+
+				.item {
+
+					.comand {
+						color:white;
+						line-height:36px;
+						text-decoration: none;
+					}
+
+					.comand:hover {
+						color:blue;
+					}
+				}
+			}
+
+			#display {
+				width:657.5px;
+				height:800px;
+				float:left;
+				border:solid 1px #ffffff;
+				border-radius:5px;
+				margin-left:4.5px;
+
+				iframe {
+					border-radius:4px;
+				}
+			}
+		}
+	}
+
+	#side_menu {
+		position:fixed;
+		left:-300px;
+		width:300px;
+		height:100%;
+		background-color:#222222;
+		opacity:0.6;
+		z-index:110;
+
+		h1 {
+			color: #fff;
+			text-align:center;
+			}
+
+		a {
+			color:white;
+			line-height:36px;
+			text-decoration: none;
+		}
+
+		a:hover {
+			color:#FF69B4;
+		}
+
+	}
+
+	#viewArea {
+		width:100vw;
+		height:100vh;
+		z-index:100;
+		position:absolute;
+		background-image: url("http://www.aoiweb.com/aoi2/00p-point/b04/b4-60.gif");
+		overflow:hidden;
+
+		#left-image {
+
+			.door-left {
+				position:absolute;
+				width:50vw;
+				height:100vh;
+			}
+
+			.paper-left {
+				opacity:0.9;
+				position:absolute;
+				width:50vw;
+				height:100vh;
+			}
+		}
+
+		#right-image {
+		margin-left:50%;
+
+			.door-right {
+				position:absolute;
+				width:50vw;
+				height:100vh;
+			}
+
+			.paper-right {
+				opacity:0.9;
+				position:absolute;
+				width:50vw;
+				height:100vh;
+			}
+		}
+	}
+
+	#footerContainer {
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		width: 100%;
+		padding:  0.5em 0;
+		background: #000;
+		border-top:solid 1px #363636;
+
+		#copyright{
+			color: #fff;
+			text-align: center;
+			font-size: 1.4em;
+			margin: 0;
+		}
+	}
+
+}
